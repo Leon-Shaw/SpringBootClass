@@ -1,5 +1,7 @@
-package cn.wzvtc.leonshaw.springbootclass.class03;
+package cn.wzvtc.leonshaw.springbootclass.class04;
 
+import cn.wzvtc.leonshaw.springbootclass.class03.Account;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/class03")
-public class SelectUserInfoBaseOnUserName {
+@RequestMapping("/class04")
+public class UpdateUserInfo {
     Map<String, Account> users = new HashMap();
 
     @RequestMapping("/register")
@@ -30,5 +32,12 @@ public class SelectUserInfoBaseOnUserName {
         } else {
             return "查询的用户不存在";
         }
+    }
+
+    @PostMapping("/updateUserInfo")
+    public String updateUserInfo(Account userIn) {
+        users.put(userIn.getUsername(), userIn);
+        System.out.println(userIn.toString());
+        return "用户" + userIn.getUsername() + "修改好了";
     }
 }
